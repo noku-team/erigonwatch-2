@@ -1,3 +1,3 @@
-module github.com/ledgerwatch/erigonwatch
+module github.com/erigontech/erigonwatch
 
 go 1.21
