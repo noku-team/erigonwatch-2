@@ -55,7 +55,6 @@ export const sessionBaseUrl = (v2: boolean = false) => {
 };
 
 export const currentNodeUrl = (v2: boolean = false) => {
-	return "http://127.0.0.1:6060/debug/diag";
 	if (isLocalVersion()) {
 		let addr = store.getState().connection.backendAddress;
 		return `${addr}/debug/diag`;
@@ -387,7 +386,6 @@ function createRequest(url: string, method: string, formData?: FormData) {
 	return new Request(url, {
 		method: method,
 		headers: {
-			"Diagnostics-API-Key": "your-api-key",
 			"Content-Type": "application/json"
 		}
 	});
