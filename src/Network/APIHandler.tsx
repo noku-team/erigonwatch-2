@@ -22,7 +22,7 @@ import {
 
 const sessionVarName = "sessions";
 const nodeVarName = "nodes";
-const versionVarName = "versions";
+const versionVarName = "version";
 const flagsVarName = "flags";
 const cmdLineVarName = "cmdline";
 const logsVarName = "logs";
@@ -66,7 +66,7 @@ export const currentNodeUrl = (v2: boolean = false) => {
 };
 
 export const versionUrl = () => {
-	const baseUrl = currentNodeUrl();
+	const baseUrl = currentNodeUrl(true);
 	return `${baseUrl}/${versionVarName}`;
 };
 

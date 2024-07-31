@@ -35,7 +35,7 @@ import { StatusBar } from "./app/components/statusBar";
 import { SessionsModal } from "./app/components/SessionsModal";
 import { NodesModal } from "./app/components/nodesModal";
 import { SidebarComponent } from "./app/components/SidebarComponent/SidebarComponent";
-import { resetNetworkStateToMockState } from "./app/store/networkSlice";
+import { resetNetworkStateToMockState, updatePeersState } from "./app/store/networkSlice";
 import { NetworkDownloaderPage } from "./app/pages/NetworkDownloaderPage";
 import { Time } from "./helpers/time";
 import { PeerNetworkPage } from "./app/pages/PeerNetworkPage";
@@ -237,7 +237,7 @@ function Layout() {
 		getReorgs();
 		getPeers();
 		setInterval(() => {
-			//getPeers();
+			getPeers();
 		}, 5 * Time.second);
 		getBootnodes();
 		getSnapshotDownloadStatus();
@@ -252,7 +252,7 @@ function Layout() {
 		}, 2 * Time.second);
 
 		setInterval(() => {
-			//dispatch(updatePeersState({ activeNodeId: activeNodeId, countInterval: 15 }));
+			dispatch(updatePeersState({ activeNodeId: activeNodeId, countInterval: 15 }));
 		}, 15 * Time.second);
 
 		getHeaders();
