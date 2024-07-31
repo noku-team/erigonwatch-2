@@ -3,14 +3,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PermDataSettingIcon from "@mui/icons-material/PermDataSetting";
 import NetworkPingIcon from "@mui/icons-material/NetworkPing";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
-import LinkIcon from "@mui/icons-material/Link";
 import DatasetIcon from "@mui/icons-material/Dataset";
-import PestControlIcon from "@mui/icons-material/PestControl";
-import BiotechIcon from "@mui/icons-material/Biotech";
-import SpeedIcon from "@mui/icons-material/Speed";
-import SummarizeIcon from "@mui/icons-material/Summarize";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import WarningIcon from "@mui/icons-material/Warning";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import SyncIcon from "@mui/icons-material/Sync";
@@ -84,19 +78,19 @@ export const SidebarComponent = () => {
 				>
 					Logs
 				</MenuItem>
-				<MenuItem
+				{/*<MenuItem
 					component={<Link to="/chain" />}
 					icon={<LinkIcon />}
 				>
 					Chain
-				</MenuItem>
+				</MenuItem>*/}
 				<MenuItem
 					component={<Link to="/data" />}
 					icon={<DatasetIcon />}
 				>
 					Data
 				</MenuItem>
-				<MenuItem
+				{/*<MenuItem
 					component={<Link to="/debug" />}
 					icon={<PestControlIcon />}
 				>
@@ -134,7 +128,7 @@ export const SidebarComponent = () => {
 					}
 				>
 					Issues
-				</MenuItem>
+				</MenuItem>*/}
 				<MenuItem
 					component={<Link to="/admin" />}
 					icon={<AdminPanelSettingsIcon />}
