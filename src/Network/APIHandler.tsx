@@ -45,6 +45,7 @@ export const getActiveSessionPin = (): string => {
 export const sessionBaseUrl = (v2: boolean = false) => {
 	const sessionId = getActiveSessionPin();
 	let addr = store.getState().connection.backendAddress;
+	console.log("addr: ", addr);
 
 	let apiUrl = `${addr}/api`;
 	if (v2) {
@@ -57,6 +58,7 @@ export const sessionBaseUrl = (v2: boolean = false) => {
 export const currentNodeUrl = (v2: boolean = false) => {
 	if (isLocalVersion()) {
 		let addr = store.getState().connection.backendAddress;
+		console.log("1addr: ", addr);
 		return `${addr}/debug/diag`;
 	} else {
 		const baseUrl = sessionBaseUrl(v2);
