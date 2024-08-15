@@ -11,6 +11,10 @@ import SyncIcon from "@mui/icons-material/Sync";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import { useSelector } from "react-redux";
 import { selectIssuesCountForBadge } from "../../store/issuesSlice";
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
+import MemoryIcon from "@mui/icons-material/Memory";
+import InfoIcon from "@mui/icons-material/Info";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 export const SidebarComponent = () => {
 	const [isColapsed, setIsColapsed] = useState(false);
@@ -129,6 +133,31 @@ export const SidebarComponent = () => {
 				>
 					Issues
 				</MenuItem>*/}
+				<SubMenu
+					label="System Info"
+					icon={<DesktopWindowsIcon />}
+				>
+					<MenuItem
+						component={<Link to="/sysinfo" />}
+						icon={<InfoIcon />}
+					>
+						Info
+					</MenuItem>
+
+					<MenuItem
+						component={<Link to="/cpu-info" />}
+						icon={<MemoryIcon />}
+					>
+						CPU
+					</MenuItem>
+
+					<MenuItem
+						component={<Link to="/processes" />}
+						icon={<ListAltIcon />}
+					>
+						Processes
+					</MenuItem>
+				</SubMenu>
 				<MenuItem
 					component={<Link to="/admin" />}
 					icon={<AdminPanelSettingsIcon />}
