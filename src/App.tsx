@@ -16,6 +16,7 @@ import {
 	getBootnodes,
 	getDB,
 	getDBsList,
+	getHardwareInfo,
 	getHeaders,
 	getLogs,
 	getNodeCmdLineArgs,
@@ -47,6 +48,10 @@ import { IssuesPage } from "./app/pages/IssuesPage";
 import { resetIssueState } from "./app/store/issuesSlice";
 import { isLocalVersion } from "./helpers/env";
 import { NodeConnectionType, selectNodeConnectionType } from "./app/store/connectionSlice";
+import { SystemInfoPage } from "./app/pages/SystemInfoPage";
+import { resetSystemInfoState } from "./app/store/systemInfoSlice";
+import { SystemProcessesPage } from "./app/pages/SystemProcessesPage";
+import { SystemCPUUsage } from "./app/pages/SystemCPUUsage";
 
 function App() {
 	return (
@@ -106,6 +111,18 @@ function App() {
 					<Route
 						path="issues"
 						element={<IssuesPage />}
+					/>
+					<Route
+						path="sysinfo"
+						element={<SystemInfoPage />}
+					/>
+					<Route
+						path="processes"
+						element={<SystemProcessesPage />}
+					/>
+					<Route
+						path="cpu-info"
+						element={<SystemCPUUsage />}
 					/>
 					<Route
 						path="admin"
@@ -198,6 +215,7 @@ function Layout() {
 			dispatch(resetNetworkStateToMockState());
 			dispatch(resetSyncStagesState());
 			dispatch(resetIssueState());
+			dispatch(resetSystemInfoState());
 		}
 	}, []);
 
@@ -228,6 +246,7 @@ function Layout() {
 	}, [activeNodeId]);
 
 	const queryData = () => {
+		getHardwareInfo();
 		getNodeCmdLineArgs();
 		getNodeFlags();
 		getNodeVersion();

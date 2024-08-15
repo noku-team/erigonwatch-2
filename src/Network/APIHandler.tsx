@@ -20,6 +20,8 @@ import {
 	syncStatsMock
 } from "./../../tests/mocks";
 
+import { cpuUsageMock, hardwareInfoMock, memoryInfoMock, processesInfoMock } from "../../tests/sysinfo_mock";
+
 const sessionVarName = "sessions";
 const nodeVarName = "nodes";
 const versionVarName = "version";
@@ -37,6 +39,10 @@ const snapshotFilesListVarName = "snapshot-files-list";
 const headersVarName = "headers";
 const networkSpeedVarName = "network-speed";
 const nodeInfoVarName = "nodeinfo";
+const hardwareInfoVarName = "hardware-info";
+const cpuUsageVarName = "cpu-usage";
+const processesInfoVarName = "processes-info";
+const memoryInfoVarName = "memory-info";
 
 export const getActiveSessionPin = (): string => {
 	return store.getState().app.activeSessionPin;
@@ -58,7 +64,6 @@ export const sessionBaseUrl = (v2: boolean = false) => {
 export const currentNodeUrl = (v2: boolean = false) => {
 	if (isLocalVersion()) {
 		let addr = store.getState().connection.backendAddress;
-		console.log("1addr: ", addr);
 		return `${addr}/debug/diag`;
 	} else {
 		const baseUrl = sessionBaseUrl(v2);
@@ -137,6 +142,22 @@ export const nodeInfoUrl = () => {
 
 export const backendUrlUrl = () => {
 	return `${window.location.origin}/diagaddr`;
+};
+
+export const hardwareInfoUrl = () => {
+	return `${currentNodeUrl(true)}/${hardwareInfoVarName}`;
+};
+
+export const cpuUsageUrl = () => {
+	return `${currentNodeUrl(true)}/${cpuUsageVarName}`;
+};
+
+export const processesInfoUrl = () => {
+	return `${currentNodeUrl(true)}/${processesInfoVarName}`;
+};
+
+export const memoryInfoUrl = () => {
+	return `${currentNodeUrl(true)}/${memoryInfoVarName}`;
 };
 
 export const fetchBackendUrl = () => {
@@ -360,6 +381,52 @@ export const fetchNetworkSpeed = () => {
 		});
 	} else {
 		const request = createRequest(networkSpeedUrl(), "GET");
+		return fetchRequest(request);
+	}
+};
+
+export const fetchHardwareInfo = () => {
+	if (import.meta.env.VITE_SERVER_RESPONSE_TYPE === "MOCK") {
+		return new Promise((resolve, reject) => {
+			resolve(hardwareInfoMock);
+		});
+	} else {
+		const request = createRequest(hardwareInfoUrl(), "GET");
+		return fetchRequest(request);
+	}
+};
+
+export const fetchCpuUsage = () => {
+	if (import.meta.env.VITE_SERVER_RESPONSE_TYPE === "MOCK") {
+		return new Promise((resolve, reject) => {
+			resolve(cpuUsageMock);
+		});
+	} else {
+		const request = createRequest(cpuUsageUrl(), "GET");
+		return fetchRequest(request);
+	}
+};
+
+export const fetchProcessesInfo = () => {
+	if (import.meta.env.VITE_SERVER_RESPONSE_TYPE === "MOCK") {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve(processesInfoMock);
+			}, 4000);
+		});
+	} else {
+		const request = createRequest(processesInfoUrl(), "GET");
+		return fetchRequest(request);
+	}
+};
+
+export const fetchMemoryInfo = () => {
+	if (import.meta.env.VITE_SERVER_RESPONSE_TYPE === "MOCK") {
+		return new Promise((resolve, reject) => {
+			resolve(memoryInfoMock);
+		});
+	} else {
+		const request = createRequest(memoryInfoUrl(), "GET");
 		return fetchRequest(request);
 	}
 };
