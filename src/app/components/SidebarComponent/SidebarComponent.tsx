@@ -15,6 +15,7 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import MemoryIcon from "@mui/icons-material/Memory";
 import InfoIcon from "@mui/icons-material/Info";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import NetworkCheckIcon from "@mui/icons-material/NetworkCheck";
 
 export const SidebarComponent = () => {
 	const [isColapsed, setIsColapsed] = useState(false);
@@ -156,6 +157,12 @@ export const SidebarComponent = () => {
 						icon={<ListAltIcon />}
 					>
 						Processes
+					</MenuItem>
+					<MenuItem
+						component={<Link to="/profile" />}
+						icon={<NetworkCheckIcon />}
+					>
+						Profile
 					</MenuItem>
 				</SubMenu>
 				<MenuItem

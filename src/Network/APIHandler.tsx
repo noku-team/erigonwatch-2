@@ -43,6 +43,7 @@ const hardwareInfoVarName = "hardware-info";
 const cpuUsageVarName = "cpu-usage";
 const processesInfoVarName = "processes-info";
 const memoryInfoVarName = "memory-info";
+const heapProfileVarName = "profile/heap";
 
 export const getActiveSessionPin = (): string => {
 	return store.getState().app.activeSessionPin;
@@ -51,7 +52,6 @@ export const getActiveSessionPin = (): string => {
 export const sessionBaseUrl = (v2: boolean = false) => {
 	const sessionId = getActiveSessionPin();
 	let addr = store.getState().connection.backendAddress;
-	console.log("addr: ", addr);
 
 	let apiUrl = `${addr}/api`;
 	if (v2) {
@@ -158,6 +158,10 @@ export const processesInfoUrl = () => {
 
 export const memoryInfoUrl = () => {
 	return `${currentNodeUrl(true)}/${memoryInfoVarName}`;
+};
+
+export const heapProfileUrl = () => {
+	return `${currentNodeUrl(false)}/${heapProfileVarName}`;
 };
 
 export const fetchBackendUrl = () => {
