@@ -52,6 +52,7 @@ import { SystemInfoPage } from "./app/pages/SystemInfoPage";
 import { resetSystemInfoState } from "./app/store/systemInfoSlice";
 import { SystemProcessesPage } from "./app/pages/SystemProcessesPage";
 import { SystemCPUUsage } from "./app/pages/SystemCPUUsage";
+import { ProfilePage } from "./app/pages/ProfilePage";
 
 function App() {
 	return (
@@ -123,6 +124,10 @@ function App() {
 					<Route
 						path="cpu-info"
 						element={<SystemCPUUsage />}
+					/>
+					<Route
+						path="profile"
+						element={<ProfilePage />}
 					/>
 					<Route
 						path="admin"
