@@ -80,8 +80,16 @@ export const getBackendUrl = () => {
 	fetchBackendUrl()
 		.then((response) => {
 			if (response.address != undefined) {
+				let beAddr = response.address;
 				store.dispatch(setNodeConnectionType(NodeConnectionType.Local));
-				store.dispatch(setBackendAddress(response.address));
+				//Check is running from diag ui command
+				if (response.address.includes("127.0.0.1")) {
+					//Check for proxy
+					if (!window.location.origin.includes("127.0.0.1")) {
+						beAddr = window.location.origin + "/api";
+					}
+				}
+				store.dispatch(setBackendAddress(beAddr));
 			} else {
 				store.dispatch(setNodeConnectionType(NodeConnectionType.Unknown));
 			}

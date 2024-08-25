@@ -160,61 +160,6 @@ function Layout() {
 	const [isNodesModalOpen, setIsNodesModalOpen] = useState(false);
 
 	useEffect(() => {
-		if (activeSession && document?.title) {
-			document.title = "ErigonWatch - " + activeSession.name;
-		}
-	}, [activeSession]);
-
-	useEffect(() => {
-		getBackendUrl();
-	}, []);
-
-	/*useEffect(() => {
-		fetch(raw)
-			.then((r) => r.text())
-			.then((text) => {
-				let arr = stringToArrayBySeparator(text, "\n");
-				let bbbb = filterStringsByPrefix(arr, "SyncStatistics");
-				let arrdddd: any[] = [];
-				bbbb.forEach((str) => {
-					let str2 = getStringByKeyFromString(str, "stats=");
-					let obj = JSON.parse(str2);
-					let obj2 = JSON.parse(obj);
-					arrdddd.push(obj2);
-					console.log(obj2);
-				});
-				saveObjectToFile(arrdddd, "syncStats");
-			});
-	}, []);
-
-	function saveObjectToFile(obj: any, filename: string) {
-		let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
-		let downloadAnchorNode = document.createElement("a");
-		downloadAnchorNode.setAttribute("href", dataStr);
-		downloadAnchorNode.setAttribute("download", filename + ".json");
-		document.body.appendChild(downloadAnchorNode); // required for firefox
-		downloadAnchorNode.click();
-		downloadAnchorNode.remove();
-	}
-
-	function getStringByKeyFromString(str: string, key: string): string {
-		let result = "";
-		if (str.includes(key)) {
-			let arr = str.split(key);
-			result = arr[1];
-		}
-		return result;
-	}
-
-	function stringToArrayBySeparator(str: string, separator: string): string[] {
-		return str.split(separator);
-	}
-
-	function filterStringsByPrefix(arr: string[], prefix: string): string[] {
-		return arr.filter((str) => str.includes(prefix));
-	}*/
-
-	useEffect(() => {
 		if (import.meta.env.VITE_SERVER_RESPONSE_TYPE === "MOCK") {
 			dispatch(resetAppStateToMockState());
 			dispatch(resetNetworkStateToMockState());
@@ -225,12 +170,14 @@ function Layout() {
 	}, []);
 
 	useEffect(() => {
-		if (conectionType !== NodeConnectionType.Unknown) {
-			if (isLocalVersion()) {
-				dispatch(addOrUpdateSession({ name: "localSession", pin: "noPin", is_active: true, nodes: [] }));
-			}
+		if (activeSession && document?.title) {
+			document.title = "ErigonWatch - " + activeSession.name;
 		}
-	}, [conectionType]);
+	}, [activeSession]);
+
+	useEffect(() => {
+		getBackendUrl();
+	}, []);
 
 	useEffect(() => {
 		if (conectionType !== NodeConnectionType.Unknown) {
@@ -241,8 +188,18 @@ function Layout() {
 					getSession();
 				}
 			}
+		} else {
+			if (isLocalVersion()) {
+				dispatch(addOrUpdateSession({ name: "localSession", pin: "noPin", is_active: true, nodes: [] }));
+			}
 		}
-	}, [activeSessionPin, conectionType]);
+	}, [conectionType, activeSessionPin]);
+
+	useEffect(() => {
+		if (isLocalVersion()) {
+			dispatch(addOrUpdateSession({ name: "localSession", pin: "noPin", is_active: true, nodes: [] }));
+		}
+	}, [conectionType]);
 
 	useEffect(() => {
 		if (activeNodeId !== "" && activeSessionPin !== "") {
