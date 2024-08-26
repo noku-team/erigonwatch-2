@@ -85,7 +85,7 @@ export const getBackendUrl = () => {
 				//Check is running from diag ui command
 				if (response.address.includes("127.0.0.1")) {
 					//Check for proxy
-					if (!window.location.origin.includes("127.0.0.1")) {
+					if (!window.location.origin.includes("127.0.0.1") && !window.location.origin.includes("localhost")) {
 						beAddr = window.location.origin + "/api";
 					}
 				}
