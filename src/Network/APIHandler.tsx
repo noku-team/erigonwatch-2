@@ -43,7 +43,7 @@ const hardwareInfoVarName = "hardware-info";
 const cpuUsageVarName = "cpu-usage";
 const processesInfoVarName = "processes-info";
 const memoryInfoVarName = "memory-info";
-const heapProfileVarName = "profile/heap";
+const heapProfileVarName = "heap-profile";
 
 export const getActiveSessionPin = (): string => {
 	return store.getState().app.activeSessionPin;
