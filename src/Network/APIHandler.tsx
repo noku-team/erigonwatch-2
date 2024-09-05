@@ -43,7 +43,13 @@ const hardwareInfoVarName = "hardware-info";
 const cpuUsageVarName = "cpu-usage";
 const processesInfoVarName = "processes-info";
 const memoryInfoVarName = "memory-info";
-const heapProfileVarName = "heap-profile";
+//supported pprofs: goroutine, threadcreate, heap, allocs, block, mutex
+const goroutineProfileVarName = "pprof/goroutine";
+const threadCreateProfileVarName = "pprof/threadcreate";
+const heapProfileVarName = "pprof/heap";
+const allocsProfileVarName = "pprof/allocs";
+const blockProfileVarName = "pprof/block";
+const mutexProfileVarName = "pprof/mutex";
 
 export const getActiveSessionPin = (): string => {
 	return store.getState().app.activeSessionPin;
@@ -160,8 +166,28 @@ export const memoryInfoUrl = () => {
 	return `${currentNodeUrl(true)}/${memoryInfoVarName}`;
 };
 
+export const goroutineProfileUrl = () => {
+	return `${currentNodeUrl(true)}/${goroutineProfileVarName}`;
+};
+
+export const threadCreateProfileUrl = () => {
+	return `${currentNodeUrl(true)}/${threadCreateProfileVarName}`;
+};
+
 export const heapProfileUrl = () => {
-	return `${currentNodeUrl(false)}/${heapProfileVarName}`;
+	return `${currentNodeUrl(true)}/${heapProfileVarName}`;
+};
+
+export const allocsProfileUrl = () => {
+	return `${currentNodeUrl(true)}/${allocsProfileVarName}`;
+};
+
+export const blockProfileUrl = () => {
+	return `${currentNodeUrl(true)}/${blockProfileVarName}`;
+};
+
+export const mutexProfileUrl = () => {
+	return `${currentNodeUrl(true)}/${mutexProfileVarName}`;
 };
 
 export const fetchBackendUrl = () => {

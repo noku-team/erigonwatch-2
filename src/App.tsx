@@ -126,8 +126,28 @@ function App() {
 						element={<SystemCPUUsage />}
 					/>
 					<Route
-						path="profile"
-						element={<ProfilePage />}
+						path="goroutine"
+						element={<ProfilePage profile="goroutine" />}
+					/>
+					<Route
+						path="threadcreate"
+						element={<ProfilePage profile="threadcreate" />}
+					/>
+					<Route
+						path="heap"
+						element={<ProfilePage profile="heap" />}
+					/>
+					<Route
+						path="allocs"
+						element={<ProfilePage profile="allocs" />}
+					/>
+					<Route
+						path="block"
+						element={<ProfilePage profile="block" />}
+					/>
+					<Route
+						path="mutex"
+						element={<ProfilePage profile="mutex" />}
 					/>
 					<Route
 						path="admin"
