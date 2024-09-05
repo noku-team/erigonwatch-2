@@ -2,15 +2,26 @@ import { useState } from "react";
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { heapProfileUrl } from "../../Network/APIHandler";
+import {
+	allocsProfileUrl,
+	blockProfileUrl,
+	goroutineProfileUrl,
+	heapProfileUrl,
+	mutexProfileUrl,
+	threadCreateProfileUrl
+} from "../../Network/APIHandler";
 
-export const ProfilePage = () => {
-	const [img, setImg] = useState<string | undefined>(undefined);
+export interface ProfilePageProps {
+	profile: string;
+}
+
+export const ProfilePage = ({ profile }: ProfilePageProps) => {
+	const [imagesMap, setImagesMap] = useState<Map<string, string>>(new Map());
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const getFunction = async () => {
 		try {
-			const resp = await axios.get(heapProfileUrl(), {
+			const resp = await axios.get(getFetchUrl(), {
 				onDownloadProgress: (progressEvent) => {
 					let eventObj: XMLHttpRequest | undefined = undefined;
 					if (progressEvent.event?.currentTarget) {
@@ -24,24 +35,37 @@ export const ProfilePage = () => {
 				}
 			});
 			setLoading(false);
-			setImg(resp.data);
+			imagesMap.set(profile, resp.data);
 		} catch (error) {
 			setLoading(false);
 			console.error(error);
 		}
 	};
 
-	const Example = () => {
-		return (
-			<TransformWrapper>
-				<TransformComponent>
-					<img
-						src={img}
-						alt="test"
-					/>
-				</TransformComponent>
-			</TransformWrapper>
-		);
+	const getFetchUrl = () => {
+		switch (profile) {
+			case "heap":
+				return heapProfileUrl();
+			case "goroutine":
+				return goroutineProfileUrl();
+			case "threadcreate":
+				return threadCreateProfileUrl();
+			case "block":
+				return blockProfileUrl();
+			case "mutex":
+				return mutexProfileUrl();
+			case "allocs":
+				return allocsProfileUrl();
+			default:
+				return heapProfileUrl();
+		}
+	};
+
+	const capitalizeFirstLetter = (str: string): string => {
+		if (str.length === 0) {
+			return str;
+		}
+		return str[0].toUpperCase() + str.slice(1);
 	};
 
 	return (
@@ -64,16 +88,16 @@ export const ProfilePage = () => {
 					)}
 				</div>
 				<div className="w-[15%]">
-					<h3 className="text-xl font-semibold">Heap Profile</h3>
+					<h3 className="text-xl font-semibold">{capitalizeFirstLetter(profile) + " Profile"}</h3>
 				</div>
 				<div className="w-[15%]" />
 			</div>
 			<div className="mt-5 mr-5 mb-5">
-				{img && (
+				{imagesMap.get(profile) && (
 					<TransformWrapper>
 						<TransformComponent>
 							<img
-								src={`data:image/png;base64,${img}`}
+								src={`data:image/png;base64,${imagesMap.get(profile)}`}
 								alt="test"
 							/>
 						</TransformComponent>

@@ -15,7 +15,13 @@ import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import MemoryIcon from "@mui/icons-material/Memory";
 import InfoIcon from "@mui/icons-material/Info";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import NetworkCheckIcon from "@mui/icons-material/NetworkCheck";
+import RouteIcon from "@mui/icons-material/Route";
+import GestureIcon from "@mui/icons-material/Gesture";
+import SpeedIcon from "@mui/icons-material/Speed";
+import AccountTreeIcon from "@mui/icons-material/AccountTree";
+import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import Diversity2Icon from "@mui/icons-material/Diversity2";
 
 export const SidebarComponent = () => {
 	const [isColapsed, setIsColapsed] = useState(false);
@@ -158,11 +164,47 @@ export const SidebarComponent = () => {
 					>
 						Processes
 					</MenuItem>
+				</SubMenu>
+				<SubMenu
+					label="Profile"
+					icon={<SpeedIcon />}
+				>
 					<MenuItem
-						component={<Link to="/profile" />}
-						icon={<NetworkCheckIcon />}
+						component={<Link to="/goroutine" />}
+						icon={<RouteIcon />}
 					>
-						Profile
+						Goroutine
+					</MenuItem>
+					<MenuItem
+						component={<Link to="/threadcreate" />}
+						icon={<GestureIcon />}
+					>
+						Thread Create
+					</MenuItem>
+
+					<MenuItem
+						component={<Link to="/heap" />}
+						icon={<AccountTreeIcon />}
+					>
+						Heap
+					</MenuItem>
+					<MenuItem
+						component={<Link to="/allocs" />}
+						icon={<DynamicFeedIcon />}
+					>
+						Allocs
+					</MenuItem>
+					<MenuItem
+						component={<Link to="/block" />}
+						icon={<ViewModuleIcon />}
+					>
+						Block
+					</MenuItem>
+					<MenuItem
+						component={<Link to="/mutex" />}
+						icon={<Diversity2Icon />}
+					>
+						Mutex
 					</MenuItem>
 				</SubMenu>
 				<MenuItem
